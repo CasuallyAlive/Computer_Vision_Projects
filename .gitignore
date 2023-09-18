@@ -138,3 +138,5 @@ ui-tests/.pnp.*
 
 /.quarto/
 /_site/
+*_files
+*.html
