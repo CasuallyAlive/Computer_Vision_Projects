@@ -1,0 +1,195 @@
+[1.389s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/casuallyalive/repos/Computer_Vision_Projects']
+[1.389s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/casuallyalive/repos/Computer_Vision_Projects'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f09f46c5960>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7f09f46c6620>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7f09f46c6620>>)
+[1.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.446s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.446s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/casuallyalive/repos/Computer_Vision_Projects'
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['ignore', 'ignore_ament_install']
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'ignore'
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'ignore_ament_install'
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['colcon_pkg']
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'colcon_pkg'
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['colcon_meta']
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'colcon_meta'
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['ros']
+[1.446s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'ros'
+[1.457s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['cmake', 'python']
+[1.457s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'cmake'
+[1.457s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'python'
+[1.457s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extensions ['python_setup_py']
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects) by extension 'python_setup_py'
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/log) by extensions ['ignore', 'ignore_ament_install']
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/log) by extension 'ignore'
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/log) ignored
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['ignore', 'ignore_ament_install']
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'ignore'
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'ignore_ament_install'
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['colcon_pkg']
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'colcon_pkg'
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['colcon_meta']
+[1.458s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'colcon_meta'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['ros']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'ros'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['cmake', 'python']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'cmake'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'python'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extensions ['python_setup_py']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src) by extension 'python_setup_py'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['ignore', 'ignore_ament_install']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'ignore'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'ignore_ament_install'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['colcon_pkg']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'colcon_pkg'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['colcon_meta']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'colcon_meta'
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['ros']
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'ros'
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['cmake', 'python']
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'cmake'
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'python'
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extensions ['python_setup_py']
+[1.460s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320) by extension 'python_setup_py'
+[1.832s] DEBUG:colcon.colcon_core.package_identification:Package '/home/casuallyalive/repos/Computer_Vision_Projects/src/proj1_6320' with type 'python' and name '4676-Fall2019-Proj1'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['ignore', 'ignore_ament_install']
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'ignore'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'ignore_ament_install'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['colcon_pkg']
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'colcon_pkg'
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['colcon_meta']
+[1.832s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'colcon_meta'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['ros']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'ros'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['cmake', 'python']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'cmake'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'python'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extensions ['python_setup_py']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320) by extension 'python_setup_py'
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['ignore', 'ignore_ament_install']
+[1.833s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'ignore'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'ignore_ament_install'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['colcon_pkg']
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'colcon_pkg'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['colcon_meta']
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'colcon_meta'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['ros']
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'ros'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['cmake', 'python']
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'cmake'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'python'
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extensions ['python_setup_py']
+[1.834s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/data) by extension 'python_setup_py'
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['ignore', 'ignore_ament_install']
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'ignore'
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'ignore_ament_install'
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['colcon_pkg']
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'colcon_pkg'
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['colcon_meta']
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'colcon_meta'
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['ros']
+[1.835s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'ros'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['cmake', 'python']
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'cmake'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'python'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extensions ['python_setup_py']
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/proj2_code) by extension 'python_setup_py'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['ignore', 'ignore_ament_install']
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'ignore'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'ignore_ament_install'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['colcon_pkg']
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'colcon_pkg'
+[1.836s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['colcon_meta']
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'colcon_meta'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['ros']
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'ros'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['cmake', 'python']
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'cmake'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'python'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extensions ['python_setup_py']
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results) by extension 'python_setup_py'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['ignore', 'ignore_ament_install']
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'ignore'
+[1.837s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'ignore_ament_install'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['colcon_pkg']
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'colcon_pkg'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['colcon_meta']
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'colcon_meta'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['ros']
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'ros'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['cmake', 'python']
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'cmake'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'python'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extensions ['python_setup_py']
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_1) by extension 'python_setup_py'
+[1.838s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['ignore', 'ignore_ament_install']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'ignore'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'ignore_ament_install'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['colcon_pkg']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'colcon_pkg'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['colcon_meta']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'colcon_meta'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['ros']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'ros'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['cmake', 'python']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'cmake'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'python'
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extensions ['python_setup_py']
+[1.839s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_2) by extension 'python_setup_py'
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['ignore', 'ignore_ament_install']
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'ignore'
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'ignore_ament_install'
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['colcon_pkg']
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'colcon_pkg'
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['colcon_meta']
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'colcon_meta'
+[1.840s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['ros']
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'ros'
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['cmake', 'python']
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'cmake'
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'python'
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extensions ['python_setup_py']
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_3) by extension 'python_setup_py'
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['ignore', 'ignore_ament_install']
+[1.841s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'ignore'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'ignore_ament_install'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['colcon_pkg']
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'colcon_pkg'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['colcon_meta']
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'colcon_meta'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['ros']
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'ros'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['cmake', 'python']
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'cmake'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'python'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extensions ['python_setup_py']
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_4) by extension 'python_setup_py'
+[1.842s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['ignore', 'ignore_ament_install']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'ignore'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'ignore_ament_install'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['colcon_pkg']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'colcon_pkg'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['colcon_meta']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'colcon_meta'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['ros']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'ros'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['cmake', 'python']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'cmake'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'python'
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extensions ['python_setup_py']
+[1.843s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_5) by extension 'python_setup_py'
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['ignore', 'ignore_ament_install']
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'ignore'
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'ignore_ament_install'
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['colcon_pkg']
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'colcon_pkg'
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['colcon_meta']
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'colcon_meta'
+[1.844s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['ros']
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'ros'
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['cmake', 'python']
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'cmake'
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'python'
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extensions ['python_setup_py']
+[1.845s] Level 1:colcon.colcon_core.package_identification:_identify(/home/casuallyalive/repos/Computer_Vision_Projects/src/proj2_6320/results/Ques_6) by extension 'python_setup_py'
+[1.845s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

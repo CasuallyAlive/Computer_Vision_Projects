@@ -1,0 +1,17 @@
+name: comp_vision_env
+channels:
+- defaults
+- pytorch
+dependencies:
+- jupyter
+- matplotlib
+- pip
+- pytest
+- python=3.7
+- pytorch-cpu
+- torchvision-cpu=0.2
+- pyyaml
+- scipy=1.1.0
+- opencv
+- ipykernel
+- pandas
