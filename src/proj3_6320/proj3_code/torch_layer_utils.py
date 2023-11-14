@@ -68,10 +68,11 @@ def get_gaussian_kernel(ksize=7, sigma=5) -> torch.nn.Parameter:
 
     ############################
     ### TODO: YOUR CODE HERE ###
-
-    raise NotImplementedError('`get_gaussian_kernel` need to be '
-        + 'implemented')
-
+    def iso_gaussian(x,y):
+        return (1.0/(2.0*np.pi*sigma**2))*np.exp(-((x**2 + y**2) / (2.0*sigma**2)))
+    
+    n_half = floor(ksize/2)
+    gaussian_filter = np.array([iso_gaussian(i,j) for i in range(-n_half, n_half+1) for j in range(-n_half, n_half+1)]).reshape(ksize,ksize)
     ### END OF STUDENT CODE ####
     ############################
     gaussian_filter = gaussian_filter/gaussian_filter.sum()
@@ -98,8 +99,10 @@ def get_sobel_xy_parameters() -> torch.nn.Parameter:
     ############################
     ### TODO: YOUR CODE HERE ###
 
-    raise NotImplementedError('`get_sobel_xy_parameters` need to be '
-        + 'implemented')
+    gx = torch.Tensor([[[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]],])
+    gy = torch.Tensor([gx[0,:,:].T.tolist(),])
+    
+    kernel = nn.Parameter(torch.Tensor([gx.tolist(), gy.tolist()]))
 
     ### END OF STUDENT CODE ####
     ############################

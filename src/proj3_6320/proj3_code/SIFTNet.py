@@ -235,8 +235,7 @@ class SIFTOrientationLayer(nn.Module):
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
 
-        raise NotImplementedError('`__init__` in `SIFTOrientationLayer` needs '
-          + 'to be implemented')
+        self.con2d = nn.conv2d()
 
         #######################################################################
         #                           END OF YOUR CODE                          #
@@ -308,8 +307,12 @@ class SIFTNet(nn.Module):
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
 
-        raise NotImplementedError('`__init__` in `SIFTNet` needs to be '
-          + 'implemented')
+        self.net = nn.Sequential(
+            ImageGradientsLayer(),
+            SIFTOrientationLayer(),
+            HistogramLayer(),
+            SubGridAccumulationLayer()
+        )
 
         #######################################################################
         #                           END OF YOUR CODE                          #
