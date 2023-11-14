@@ -211,9 +211,8 @@ class SecondMomentMatrixLayer(torch.nn.Module):
         _, chs, _, _ = x.shape
         gk = get_gaussian_kernel(ksize=self.ksize, sigma=self.sigma)
         weight = torch.tensor([gk.tolist()]).unsqueeze(0).float()
-        self.conv2d.weight = nn.Parameter(
-            torch.cat([weight for _ in range(chs)])
-            )
+        weights = torch.cat([weight for _ in range(chs)]); print(weights.shape)
+        self.conv2d.weight = nn.Parameter(weights)
         output = self.conv2d(x)
         #######################################################################
         #                           END OF YOUR CODE                          #

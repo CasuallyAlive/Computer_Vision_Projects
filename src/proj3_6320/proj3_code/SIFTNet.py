@@ -123,10 +123,21 @@ class HistogramLayer(nn.Module):
         #######################################################################
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
-
-        raise NotImplementedError('`HistogramLayer.forward` function in '
-            + '`student_sift.py` needs to be implemented')
-
+        _,_,m,n = x.shape
+        per_px_histogram = torch.ones(size=(1,8,m,n), dtype=torch.float64)
+        grad_magnitudes = torch.sqrt(torch.sum(im_grads**2)).unsqueeze(0).repeat(1,8,1,1)
+        
+        grad_bin = torch.zeros_like(cosines)
+        
+        max_idxs = torch.argmax(cosines,dim=1)
+        
+        idxs_1 = max_idxs.flatten(); idxs_0 = torch.zeros_like(idxs_1).type(dtype=torch.LongTensor)
+        idxs_2 = torch.arange(m).type(dtype=torch.LongTensor)
+        idxs_3 = torch.linspace(0,n-1, idxs_2.shape[0]).type(dtype=torch.LongTensor)
+        
+        grad_bin[idxs_0, idxs_1, idxs_2, idxs_3] = 1
+        per_px_histogram = torch.mul(grad_magnitudes, grad_bin)
+        print(per_px_histogram.sum(dim=2))
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -162,10 +173,10 @@ class SubGridAccumulationLayer(nn.Module):
         #######################################################################
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
-
-        raise NotImplementedError('`__init__` in `SubGridAccumulationLayer` '
-          + 'needs to be implemented')
-
+        ksize = 4
+        self.conv2d = nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(ksize,ksize), \
+            bias=False, padding=floor((ksize-1.0)/2.0), padding_mode='zeros', groups=8)
+        self.conv2d.weight = nn.Parameter(torch.ones(8,1,ksize, ksize))
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -201,9 +212,9 @@ def angles_to_vectors_2d_pytorch(angles: torch.Tensor) -> torch.Tensor:
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
 
-    raise NotImplementedError('`angles_to_vectors_2d_pytorch` needs to be '
-      + 'implemented')
-
+    angle_vectors = torch.zeros(size=(len(angles), 2), dtype=torch.float64)
+    angle_vectors[:,0] = torch.cos(angles); angle_vectors[:,1] = torch.sin(angles)
+    
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -235,8 +246,9 @@ class SIFTOrientationLayer(nn.Module):
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
 
-        self.con2d = nn.conv2d()
-
+        self.conv2d = nn.Conv2d(in_channels=2, out_channels=10, kernel_size=1, \
+            bias=False)
+        self.conv2d.weight = self.get_orientation_bin_weights()
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
