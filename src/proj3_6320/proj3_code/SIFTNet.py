@@ -410,25 +410,26 @@ def get_siftnet_features(img_bw: torch.Tensor, x: np.ndarray, y: np.ndarray) -> 
 
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
-    ###########################################################################
-    K=x.shape[0]
-    features = net(img_bw) # shape:= (1,8,K,16)
-    print(features.shape)
-    print(img_bw.shape)
+    ###########################################################################    
+    features = net(img_bw) # shape:= (1,8,M+1,N+1)
+    _,_,M,N = features.shape; K= int(x.shape[0])
+    # print(features.shape)
+    # print(img_bw.shape)
+    fvs = np.zeros(shape=(4,128))
+    for k in range(K):
+        x_g, y_g = get_sift_subgrid_coords(x[floor(k)], y[floor(k)])
         
-    grid_coords = np.array([np.array(get_sift_subgrid_coords(x[i], y[i])) \
-        for i in range(K)]) # shape:=(K,2,16)
-    extracted_features = features[:,:,grid_coords[:,1,:].flatten(), grid_coords[:,0,:].flatten()]
-    # print(extracted_features.shape)
-    print(grid_coords[:,1,:].shape)
-    norm_features = nn.functional.normalize(extracted_features, dim=2).detach()
-    # exps = np.ones(shape=(4,))*0.9
-    # print(exps)
-    # fvs = np.power(norm_features, exps[:, np.newaxis])
-    # print(fvs.shape)
-    fvs = (norm_features**0.9).reshape(shape=(K,128))
-    print(fvs.sum())
-    print(fvs[:,64:66])
+        extracted_features = (nn.functional.normalize
+            (
+                torch.cat
+                (
+                    [features[:, :, y_g[m], x_g[m]] for m in range(16)], dim=1
+                )
+            ).detach().numpy())**0.9
+
+        fvs[k,:] = extracted_features
+    # print(fvs.sum())
+    # print(fvs[:,64:66])
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
