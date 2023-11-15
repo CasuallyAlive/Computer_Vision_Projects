@@ -77,7 +77,7 @@ def match_features(features1, features2, x1, y1, x2, y2):
     for i in range(n):
         d = dists[i,:]; idxs = np.argsort(d)[:2]          
         ratio = d[idxs[0]]/d[idxs[1]]
-        if ratio < 0.8: # Ratio Test
+        if ratio < 0.70: # Ratio Test
             matches.append([i,idxs[0]]); confidences.append(d[idxs[0]])
     matches = np.array(matches); confidences = np.array(confidences)
     idxs = np.argsort(confidences)[::-1]
