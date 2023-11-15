@@ -362,7 +362,7 @@ def get_interest_points(image: torch.Tensor, num_points: int = 4500) -> Tuple[to
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
-    m, n = R.shape; R_vec = R.flatten()
+    m,n = R.shape; R_vec = R.flatten()
     
     idx = (torch.argsort(-1 * R_vec))[:num_points]
     y = idx // n; x = idx - y*n
@@ -404,7 +404,7 @@ def remove_border_vals(img, x: torch.Tensor, y: torch.Tensor, c: torch.Tensor) -
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
-    _,_,m,n = img.shape
+    _,_,n,m = img.shape
     w_size = 16
 
     x_mask = (x > w_size) & (x < m - w_size)

@@ -375,8 +375,8 @@ def get_sift_subgrid_coords(x_center: int, y_center: int):
     y_patch = np.linspace(y_center-6, y_center+6, 4)
 
     x_grid, y_grid = np.meshgrid(x_patch, y_patch)
-    x_grid = x_grid.reshape((16,)).astype(np.int64)
-    y_grid = y_grid.reshape((16,)).astype(np.int64)
+    x_grid = x_grid.flatten().astype(np.int64)
+    y_grid = y_grid.flatten().astype(np.int64)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
@@ -415,10 +415,11 @@ def get_siftnet_features(img_bw: torch.Tensor, x: np.ndarray, y: np.ndarray) -> 
     _,_,M,N = features.shape; K= int(x.shape[0])
     # print(features.shape)
     # print(img_bw.shape)
-    fvs = np.zeros(shape=(4,128))
+    fvs = np.zeros(shape=(K,128))
     for k in range(K):
-        x_g, y_g = get_sift_subgrid_coords(x[floor(k)], y[floor(k)])
-        
+        x_g, y_g = get_sift_subgrid_coords(x[k], y[k])
+        y_g[y_g >= M] = M-1; x_g[x_g >= N] = N-1
+
         extracted_features = (nn.functional.normalize
             (
                 torch.cat

@@ -20,8 +20,7 @@ def compute_feature_distances(features1, features2):
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
 
-    raise NotImplementedError('`match_features` function in ' +
-        '`student_feature_matching.py` needs to be implemented')
+    dists = np.linalg.norm(features1[:,np.newaxis] - features2, axis=2)
 
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -67,10 +66,22 @@ def match_features(features1, features2, x1, y1, x2, y2):
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
-
-    raise NotImplementedError('`match_features` function in ' +
-        '`student_feature_matching.py` needs to be implemented')
-
+    dists = compute_feature_distances(features1, features2)
+    # print(dists)
+    n,m = dists.shape
+    
+    matches =[]
+    confidences = []
+    dists = compute_feature_distances(features1, features2)
+      
+    for i in range(n):
+        d = dists[i,:]; idxs = np.argsort(d)[:2]          
+        ratio = d[idxs[0]]/d[idxs[1]]
+        if ratio < 0.8: # Ratio Test
+            matches.append([i,idxs[0]]); confidences.append(d[idxs[0]])
+    matches = np.array(matches); confidences = np.array(confidences)
+    idxs = np.argsort(confidences)[::-1]
+    confidences = confidences[idxs]; matches = matches[idxs,:]
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
