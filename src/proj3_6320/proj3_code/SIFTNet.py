@@ -125,19 +125,22 @@ class HistogramLayer(nn.Module):
         #######################################################################
         _,_,m,n = x.shape
         per_px_histogram = torch.ones(size=(1,8,m,n), dtype=torch.float64)
-        grad_magnitudes = torch.sqrt(torch.sum(im_grads**2)).unsqueeze(0).repeat(1,8,1,1)
+        grad_magnitudes = torch.sqrt(torch.sum(im_grads**2, dim=1)).unsqueeze(0).repeat(1,8,1,1)
         
         grad_bin = torch.zeros_like(cosines)
         
         max_idxs = torch.argmax(cosines,dim=1)
         
         idxs_1 = max_idxs.flatten(); idxs_0 = torch.zeros_like(idxs_1).type(dtype=torch.LongTensor)
-        idxs_2 = torch.arange(m).type(dtype=torch.LongTensor)
-        idxs_3 = torch.linspace(0,n-1, idxs_2.shape[0]).type(dtype=torch.LongTensor)
         
+        g1, g2 = torch.meshgrid(torch.arange(m), torch.arange(n))
+        idxs_2 = g1.flatten().type(dtype=torch.LongTensor)
+        idxs_3 = g2.flatten().type(dtype=torch.LongTensor)
+        # print(idxs_0.shape); print(idxs_1.shape); print(idxs_2.shape), print(idxs_3.shape)
+        # print(grad_magnitudes)
         grad_bin[idxs_0, idxs_1, idxs_2, idxs_3] = 1
         per_px_histogram = torch.mul(grad_magnitudes, grad_bin)
-        print(per_px_histogram.sum(dim=2))
+        # print(per_px_histogram.sum(dim=2))
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -174,9 +177,9 @@ class SubGridAccumulationLayer(nn.Module):
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
         ksize = 4
-        self.conv2d = nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(ksize,ksize), \
-            bias=False, padding=floor((ksize-1.0)/2.0), padding_mode='zeros', groups=8)
-        self.conv2d.weight = nn.Parameter(torch.ones(8,1,ksize, ksize))
+        self.layer = nn.Conv2d(in_channels=8, out_channels=8, kernel_size=(ksize,ksize), \
+            bias=False, padding=(2,2), padding_mode='zeros', groups=8)
+        self.layer.weight = nn.Parameter(torch.ones(8,1,ksize, ksize))
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -219,7 +222,7 @@ def angles_to_vectors_2d_pytorch(angles: torch.Tensor) -> torch.Tensor:
     #                             END OF YOUR CODE                            #
     ###########################################################################
 
-    return angle_vectors
+    return angle_vectors.type(torch.float64)
 
 
 class SIFTOrientationLayer(nn.Module):
@@ -246,9 +249,9 @@ class SIFTOrientationLayer(nn.Module):
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
 
-        self.conv2d = nn.Conv2d(in_channels=2, out_channels=10, kernel_size=1, \
+        self.layer = nn.Conv2d(in_channels=2, out_channels=10, kernel_size=1, \
             bias=False)
-        self.conv2d.weight = self.get_orientation_bin_weights()
+        self.layer.weight = self.get_orientation_bin_weights()
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -275,10 +278,12 @@ class SIFTOrientationLayer(nn.Module):
         #######################################################################
         # TODO: YOUR CODE HERE                                                #
         #######################################################################
+        angles = torch.from_numpy(np.deg2rad(np.linspace(22.5, 337.5, 8))).type(torch.float64)
 
-        raise NotImplementedError('`get_orientation_bin_weights` needs to be '
-          + 'implemented')
-
+        vecs = angles_to_vectors_2d_pytorch(angles)
+        weight_param = nn.Parameter(torch.cat([vecs, torch.tensor([[1],[0]], \
+            dtype=torch.float64).T, torch.tensor([[0],[1]], \
+            dtype=torch.float64).T]).reshape(shape=(10,2,1,1)).float())
         #######################################################################
         #                           END OF YOUR CODE                          #
         #######################################################################
@@ -365,14 +370,16 @@ def get_sift_subgrid_coords(x_center: int, y_center: int):
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
+    
+    x_patch = np.linspace(x_center-6, x_center+6, 4)
+    y_patch = np.linspace(y_center-6, y_center+6, 4)
 
-    raise NotImplementedError('`get_sift_subgrid_coords` needs to be '
-      + 'implemented')
-
+    x_grid, y_grid = np.meshgrid(x_patch, y_patch)
+    x_grid = x_grid.reshape((16,)).astype(np.int64)
+    y_grid = y_grid.reshape((16,)).astype(np.int64)
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
-
     return x_grid, y_grid
 
 
@@ -404,9 +411,24 @@ def get_siftnet_features(img_bw: torch.Tensor, x: np.ndarray, y: np.ndarray) -> 
     ###########################################################################
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
-
-    raise NotImplementedError('`get_siftnet_features` needs to be implemented')
-
+    K=x.shape[0]
+    features = net(img_bw) # shape:= (1,8,K,16)
+    print(features.shape)
+    print(img_bw.shape)
+        
+    grid_coords = np.array([np.array(get_sift_subgrid_coords(x[i], y[i])) \
+        for i in range(K)]) # shape:=(K,2,16)
+    extracted_features = features[:,:,grid_coords[:,1,:].flatten(), grid_coords[:,0,:].flatten()]
+    # print(extracted_features.shape)
+    print(grid_coords[:,1,:].shape)
+    norm_features = nn.functional.normalize(extracted_features, dim=2).detach()
+    # exps = np.ones(shape=(4,))*0.9
+    # print(exps)
+    # fvs = np.power(norm_features, exps[:, np.newaxis])
+    # print(fvs.shape)
+    fvs = (norm_features**0.9).reshape(shape=(K,128))
+    print(fvs.sum())
+    print(fvs[:,64:66])
     ###########################################################################
     #                             END OF YOUR CODE                            #
     ###########################################################################
