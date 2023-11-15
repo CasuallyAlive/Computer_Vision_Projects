@@ -20,7 +20,8 @@ def compute_feature_distances(features1, features2):
     # TODO: YOUR CODE HERE                                                    #
     ###########################################################################
 
-    dists = np.linalg.norm(features1[:,np.newaxis] - features2, axis=2)
+    dists = np.linalg.norm(features1[:,np.newaxis].astype(np.float16) - \
+      features2.astype(np.float16), axis=2).astype(np.float16)
 
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -72,7 +73,6 @@ def match_features(features1, features2, x1, y1, x2, y2):
     
     matches =[]
     confidences = []
-    dists = compute_feature_distances(features1, features2)
       
     for i in range(n):
         d = dists[i,:]; idxs = np.argsort(d)[:2]          
