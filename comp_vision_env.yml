@@ -2,6 +2,7 @@ name: comp_vision_env
 channels:
 - defaults
 - pytorch
+- conda-forge
 dependencies:
 - jupyter
 - matplotlib
@@ -11,7 +12,7 @@ dependencies:
 - pytorch-cpu
 - torchvision-cpu=0.2
 - pyyaml
-- scipy=1.1.0
+- scipy
 - opencv
 - ipykernel
 - pandas

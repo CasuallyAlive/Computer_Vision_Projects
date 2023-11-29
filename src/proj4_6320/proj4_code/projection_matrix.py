@@ -27,7 +27,12 @@ def projection(P: np.ndarray, points_3d: np.ndarray) -> np.ndarray:
     #######################################################################
     # YOUR CODE HERE                                                      #
     #######################################################################
-
+    n, m = points_3d.shape
+    points_3d = np.concatenate((points_3d, np.ones(shape=(n,1))), axis=1) if m < 4 else points_3d
+    x_n = ((points_3d[:, :]@P[0, :].T) / (points_3d[:, :]@P[2,:].T)).reshape((n,1))
+    y_n = ((points_3d[:, :]@P[1, :].T) / (points_3d[:, :]@P[2,:].T)).reshape((n,1))
+    
+    projected_points_2d = np.concatenate((x_n, y_n), axis=1)
     #######################################################################
     #                           END OF YOUR CODE                          #
     #######################################################################
