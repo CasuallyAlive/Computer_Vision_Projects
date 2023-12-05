@@ -23,7 +23,7 @@ def test_generate_random_stereogram():
                          right_img[:, :, ch_idx]).shape[0] == 0
 
   diff_img = torch.abs(left_img - right_img)
-
+  
   # get the region where left and right images are different
   nonzero_idx = torch.nonzero(diff_img)
   falsevals = torch.nonzero(~(

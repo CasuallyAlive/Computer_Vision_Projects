@@ -56,8 +56,29 @@ def generate_random_stereogram(im_size: Tuple[int, int, int] = (51, 51, 3), disp
   # Student code begin
   ############################################################################
 
-  raise NotImplementedError("generate_random_stereogram not implemented")
+  im_left = torch.from_numpy(np.random.rand(H,W,C))
+  
+  for c in range(1, C):
+    im_left[:,:,c] = im_left[:,:,0]
+  
+  im_right = copy.deepcopy(im_left)
+  im_center = block_size
+  
+  vert_h, vert_l = int(im_center[0] + block_size[0]//2), int(im_center[0] - block_size[0]//2)
+  hori_h, hori_l = int(im_center[1] + block_size[1]//2), int(im_center[1] - block_size[1]//2)
+  
+  block_img = copy.deepcopy(im_right[vert_l:vert_h+1,hori_l:hori_h+1,:])
+  
+  im_right[vert_l:vert_h+1, hori_l:hori_h+1,:] = np.nan
+  im_right[vert_l:vert_h+1, (hori_l-disparity):(hori_h-disparity)+1,:] = block_img
 
+  im_r_cpy = copy.deepcopy(im_right[:,:,0])
+  hole_mask = torch.isnan(im_r_cpy)
+
+  im_r_cpy[hole_mask] = torch.from_numpy(np.random.rand(im_r_cpy[hole_mask].shape[0]))
+  
+  for c in range(C):
+    im_right[:,:, c] = im_r_cpy
   ############################################################################
   # Student code end
   ############################################################################

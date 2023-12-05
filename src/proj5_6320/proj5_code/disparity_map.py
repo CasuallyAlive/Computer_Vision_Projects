@@ -12,55 +12,72 @@ def calculate_disparity_map(left_img: torch.Tensor,
                             block_size: int,
                             sim_measure_function: Callable,
                             max_search_bound: int = 50) -> torch.Tensor:
-  """
-  Calculate the disparity value at each pixel by searching a small 
-  patch around a pixel from the left image in the right image
+    """
+    Calculate the disparity value at each pixel by searching a small 
+    patch around a pixel from the left image in the right image
 
-  Note: 
-  1.  It is important for this project to follow the convention of search
-      input in left image and search target in right image
-  2.  While searching for disparity value for a patch, it may happen that there
-      are multiple disparity values with the minimum value of the similarity
-      measure. In that case we need to pick the smallest disparity value.
-      Please check the numpy's argmin and pytorch's argmin carefully.
-      Example:
-      -- diparity_val -- | -- similarity error --
-      -- 0               | 5 
-      -- 1               | 4
-      -- 2               | 7
-      -- 3               | 4
-      -- 4               | 12
+    Note: 
+    1.  It is important for this project to follow the convention of search
+        input in left image and search target in right image
+    2.  While searching for disparity value for a patch, it may happen that there
+        are multiple disparity values with the minimum value of the similarity
+        measure. In that case we need to pick the smallest disparity value.
+        Please check the numpy's argmin and pytorch's argmin carefully.
+        Example:
+        -- diparity_val -- | -- similarity error --
+        -- 0               | 5 
+        -- 1               | 4
+        -- 2               | 7
+        -- 3               | 4
+        -- 4               | 12
 
-      In this case we need the output to be 1 and not 3.
-  3. The max_search_bound is defined from the patch center.
+        In this case we need the output to be 1 and not 3.
+    3. The max_search_bound is defined from the patch center.
 
-  Args:
-  -   left_img: image from the left stereo camera. Torch tensor of shape (H,W,C).
+    Args:
+    -   left_img: image from the left stereo camera. Torch tensor of shape (H,W,C).
                 C will be >= 1.
-  -   right_img: image from the right stereo camera. Torch tensor of shape (H,W,C)
-  -   block_size: the size of the block to be used for searching between
-                  left and right image
-  -   sim_measure_function: a function to measure similarity measure between
+    -   right_img: image from the right stereo camera. Torch tensor of shape (H,W,C)
+    -   block_size: the size of the block to be used for searching between
+                    left and right image
+    -   sim_measure_function: a function to measure similarity measure between
                             two tensors of the same shape; returns the error value
-  -   max_search_bound: the maximum horizontal distance (in terms of pixels) 
+    -   max_search_bound: the maximum horizontal distance (in terms of pixels) 
                         to use for searching
-  Returns:
-  -   disparity_map: The map of disparity values at each pixel. 
-                     Tensor of shape (H-2*(block_size//2),W-2*(block_size//2))
-  """
+    Returns:
+    -   disparity_map: The map of disparity values at each pixel. 
+                        Tensor of shape (H-2*(block_size//2),W-2*(block_size//2))
+    """
 
-  assert left_img.shape == right_img.shape
-  disparity_map = torch.zeros(1) #placeholder, this is not the actual size
-  ############################################################################
-  # Student code begin
-  ############################################################################
+    assert left_img.shape == right_img.shape
+    disparity_map = torch.zeros(1) #placeholder, this is not the actual size
+    ############################################################################
+    # Student code begin
+    ############################################################################
+    H, W, C = left_img.shape; b_h = int(block_size//2)
+    disparity_map = torch.zeros(size=(int(H-2*b_h), int(W-2*b_h)))
+    
+    x1, y1 = int((W*3)//4), int(H//2)
+    if y1 >= disparity_map.size()[0]: y1 = int(disparity_map.size()[0])-1
+    if x1 < 0: x1 = int(W - b_h-1)
+    if x1 >= disparity_map.size()[0]: x1 = int(disparity_map.size()[1])-1
+    # print(max_search_bound)
+    p1 = left_img[int(y1-b_h):int(y1+b_h)+1, (x1-b_h):(x1+b_h)+1, :]
+    min_x = x1 - max_search_bound*b_h if x1-max_search_bound*b_h >= b_h else b_h
+    max_x = x1
+    # print(min_x, max_x)
+    # for yi in range()
+    for xi in range(min_x, max_x):
+        disp = int(x1-xi)
+        # print(y1,xi)
+        p2 = right_img[y1-b_h:y1+b_h+1, xi-b_h:xi+b_h+1, :]
 
-  raise NotImplementedError('calculate_disparity_map not implemented')
-
-  ############################################################################
-  # Student code end
-  ############################################################################
-  return disparity_map
+        disparity_map[y1, xi] = sim_measure_function(p1, p2)
+        
+    ############################################################################
+    # Student code end
+    ############################################################################
+    return disparity_map
 
 def calculate_cost_volume(left_img: torch.Tensor,
                           right_img: torch.Tensor,

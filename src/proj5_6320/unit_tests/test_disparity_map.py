@@ -90,8 +90,6 @@ def test_disparity_deltafn_failure():
   # we should get two non-zero values in the disparity map
   nonzero_disp = torch.nonzero(disp_map).data
   
-  print(nonzero_disp)
-
   # check the size
   assert nonzero_disp.size() != (2, 2)
 
