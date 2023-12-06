@@ -54,26 +54,41 @@ def calculate_disparity_map(left_img: torch.Tensor,
     ############################################################################
     # Student code begin
     ############################################################################
+    
     H, W, C = left_img.shape; b_h = int(block_size//2)
     disparity_map = torch.zeros(size=(int(H-2*b_h), int(W-2*b_h)))
     
-    x1, y1 = int((W*3)//4), int(H//2)
-    if y1 >= disparity_map.size()[0]: y1 = int(disparity_map.size()[0])-1
-    if x1 < 0: x1 = int(W - b_h-1)
-    if x1 >= disparity_map.size()[0]: x1 = int(disparity_map.size()[1])-1
+    # x1, y1 = int(W - b_h - 1), int(H//2)
+    # if y1 >= disparity_map.size()[0]: y1 = int(disparity_map.size()[0])-1
+    # if x1 < 0: x1 = int(W - b_h-1)
+    # if x1 >= disparity_map.size()[0]: x1 = int(disparity_map.size()[1])-1
     # print(max_search_bound)
-    p1 = left_img[int(y1-b_h):int(y1+b_h)+1, (x1-b_h):(x1+b_h)+1, :]
-    min_x = x1 - max_search_bound*b_h if x1-max_search_bound*b_h >= b_h else b_h
-    max_x = x1
+    
+    min_x = int(np.max([W - b_h - 1 - max_search_bound, b_h]))
+    max_x = int(np.min([W - b_h - 1, disparity_map.shape[1]- 1]))
+    min_y = b_h
+    max_y = int(np.min([H-b_h-1, int(disparity_map.shape[0])-1])); 
+    
     # print(min_x, max_x)
-    # for yi in range()
-    for xi in range(min_x, max_x):
-        disp = int(x1-xi)
-        # print(y1,xi)
-        p2 = right_img[y1-b_h:y1+b_h+1, xi-b_h:xi+b_h+1, :]
-
-        disparity_map[y1, xi] = sim_measure_function(p1, p2)
+    for yi in range(min_y, max_y):
         
+        for xi1 in range(min_x, max_x):
+            p1 = left_img[int(yi-b_h):int(yi+b_h)+1, (xi1-b_h):(xi1+b_h)+1, :]
+            
+            min_error = np.Infinity; min_disp = np.Infinity; min_idx = xi1
+            
+            for xi2 in range(min_x, xi1+1):
+                p2 = right_img[int(yi-b_h):int(yi+b_h)+1, (xi2-b_h):(xi2+b_h)+1, :]
+                error = sim_measure_function(p1, p2)
+                
+                disp = np.abs(xi1 - xi2)
+                if error < min_error or (min_error == error and disp < min_disp):
+                    min_disp = int(disp)
+                    min_idx = xi2
+                
+                min_error = np.min([min_error, error])
+            disparity_map[yi, min_idx] = min_error
+    print(disparity_map)
     ############################################################################
     # Student code end
     ############################################################################
