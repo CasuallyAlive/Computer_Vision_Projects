@@ -71,23 +71,21 @@ def calculate_disparity_map(left_img: torch.Tensor,
     
     # print(min_x, max_x)
     for yi in range(min_y, max_y):
+        p1 = left_img[int(yi-b_h):int(yi+b_h)+1, (max_x-b_h):(max_x+b_h)+1, :]
         
-        for xi1 in range(min_x, max_x):
-            p1 = left_img[int(yi-b_h):int(yi+b_h)+1, (xi1-b_h):(xi1+b_h)+1, :]
+        min_error = np.Infinity; min_disp = np.Infinity
+        for xi1 in range(min_x, max_x+1):
             
-            min_error = np.Infinity; min_disp = np.Infinity; min_idx = xi1
+            p2 = right_img[int(yi-b_h):int(yi+b_h)+1, (xi1-b_h):(xi1+b_h)+1, :]
+            error = sim_measure_function(p1, p2)
+
+            disp = np.abs(xi1 - xi1)
+            if error < min_error or (min_error == error and disp < min_disp):
+                min_disp = int(disp)
+            min_error = np.min([min_error, error])
             
-            for xi2 in range(min_x, xi1+1):
-                p2 = right_img[int(yi-b_h):int(yi+b_h)+1, (xi2-b_h):(xi2+b_h)+1, :]
-                error = sim_measure_function(p1, p2)
-                
-                disp = np.abs(xi1 - xi2)
-                if error < min_error or (min_error == error and disp < min_disp):
-                    min_disp = int(disp)
-                    min_idx = xi2
-                
-                min_error = np.min([min_error, error])
-            disparity_map[yi, min_idx] = min_error
+        disparity_map[yi, xi1] = min_disp
+    
     print(disparity_map)
     ############################################################################
     # Student code end
