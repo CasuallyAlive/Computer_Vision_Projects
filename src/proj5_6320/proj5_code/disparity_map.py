@@ -59,8 +59,8 @@ def calculate_disparity_map(left_img: torch.Tensor,
     disparity_map = torch.zeros(size=(int(H-2*b_h), int(W-2*b_h)))
     
     def compare_patches(y, x, p1):
-        x_min = max(b_h, x - max_search_bound)
-        x_max = min(W - b_h, x + 1)
+        x_min = max(b_h, x - max_search_bound+1)
+        x_max = min(W - b_h, x_min+max_search_bound)
         
         min_error = np.Infinity; min_idx = (y, x)
         for xi in range(x_min, x_max):
