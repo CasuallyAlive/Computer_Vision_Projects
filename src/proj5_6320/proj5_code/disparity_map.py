@@ -58,35 +58,39 @@ def calculate_disparity_map(left_img: torch.Tensor,
     H, W, C = left_img.shape; b_h = int(block_size//2)
     disparity_map = torch.zeros(size=(int(H-2*b_h), int(W-2*b_h)))
     
-    # x1, y1 = int(W - b_h - 1), int(H//2)
-    # if y1 >= disparity_map.size()[0]: y1 = int(disparity_map.size()[0])-1
-    # if x1 < 0: x1 = int(W - b_h-1)
-    # if x1 >= disparity_map.size()[0]: x1 = int(disparity_map.size()[1])-1
-    # print(max_search_bound)
-    
-    min_x = int(np.max([W - b_h - 1 - max_search_bound, b_h]))
-    max_x = int(np.min([W - b_h - 1, disparity_map.shape[1]- 1]))
-    min_y = b_h
-    max_y = int(np.min([H-b_h-1, int(disparity_map.shape[0])-1])); 
-    
-    # print(min_x, max_x)
-    for yi in range(min_y, max_y):
-        p1 = left_img[int(yi-b_h):int(yi+b_h)+1, (max_x-b_h):(max_x+b_h)+1, :]
+    def compare_patches(y, x, p1):
+        x_min = max(b_h, x - max_search_bound)
+        x_max = min(W - b_h, x + 1)
         
-        min_error = np.Infinity; min_disp = np.Infinity
-        for xi1 in range(min_x, max_x+1):
+        min_error = np.Infinity; min_idx = (y, x)
+        for xi in range(x_min, x_max):
+            p2 = right_img[int(y-b_h):int(y+b_h)+1, (xi-b_h):(xi+b_h)+1, :]
             
-            p2 = right_img[int(yi-b_h):int(yi+b_h)+1, (xi1-b_h):(xi1+b_h)+1, :]
             error = sim_measure_function(p1, p2)
-
-            disp = np.abs(xi1 - xi1)
-            if error < min_error or (min_error == error and disp < min_disp):
-                min_disp = int(disp)
-            min_error = np.min([min_error, error])
-            
-        disparity_map[yi, xi1] = min_disp
+            if error < min_error or (error == min_error and \
+                                    np.abs(x - xi) < np.abs(x - min_idx[1])):
+                min_idx = (y,xi)
+                
+            min_error = min(error, min_error)
+                
+        return min_idx
     
-    print(disparity_map)
+    min_x = b_h
+    max_x = min([W-b_h, disparity_map.shape[1]])
+    
+    min_y = b_h
+    max_y = min([H-b_h, disparity_map.shape[0]])
+    
+    # going over patches on left image and then calculating disparity values.
+    for yl in range(min_y, max_y):
+        for xl in range(min_x, max_x):
+            
+            p1 = left_img[int(yl-b_h):int(yl+b_h)+1, (xl-b_h):(xl+b_h)+1, :]
+
+            _, x_min = compare_patches(yl, xl, p1)
+
+            disparity_map[yl, xl] = abs(xl - x_min)
+    
     ############################################################################
     # Student code end
     ############################################################################
@@ -97,46 +101,69 @@ def calculate_cost_volume(left_img: torch.Tensor,
                           max_disparity: int,
                           sim_measure_function: Callable,
                           block_size: int = 9):
-  """
-  Calculate the cost volume. Each pixel will have D=max_disparity cost values
-  associated with it. Basically for each pixel, we compute the cost of
-  different disparities and put them all into a tensor.
+    """
+    Calculate the cost volume. Each pixel will have D=max_disparity cost values
+    associated with it. Basically for each pixel, we compute the cost of
+    different disparities and put them all into a tensor.
 
-  Note: 
-  1.  It is important for this project to follow the convention of search
-      input in left image and search target in right image
-  2.  If the shifted patch in the right image will go out of bounds, it is
-      good to set the default cost for that pixel and disparity to be something
-      high(we recommend 255), so that when we consider costs, valid disparities will have a lower
-      cost. 
+    Note: 
+    1.  It is important for this project to follow the convention of search
+        input in left image and search target in right image
+    2.  If the shifted patch in the right image will go out of bounds, it is
+        good to set the default cost for that pixel and disparity to be something
+        high(we recommend 255), so that when we consider costs, valid disparities will have a lower
+        cost. 
 
-  Args:
-  -   left_img: image from the left stereo camera. Torch tensor of shape (H,W,C).
+    Args:
+    -   left_img: image from the left stereo camera. Torch tensor of shape (H,W,C).
                 C will be 1 or 3.
-  -   right_img: image from the right stereo camera. Torch tensor of shape (H,W,C)
-  -   max_disparity:  represents the number of disparity values we will consider.
-                  0 to max_disparity-1
-  -   sim_measure_function: a function to measure similarity measure between
-                  two tensors of the same shape; returns the error value
-  -   block_size: the size of the block to be used for searching between
-                  left and right image
-  Returns:
-  -   cost_volume: The cost volume tensor of shape (H,W,D). H,W are image
+    -   right_img: image from the right stereo camera. Torch tensor of shape (H,W,C)
+    -   max_disparity:  represents the number of disparity values we will consider.
+                    0 to max_disparity-1
+    -   sim_measure_function: a function to measure similarity measure between
+                    two tensors of the same shape; returns the error value
+    -   block_size: the size of the block to be used for searching between
+                    left and right image
+    Returns:
+    -   cost_volume: The cost volume tensor of shape (H,W,D). H,W are image
                 dimensions, and D is max_disparity. cost_volume[x,y,d] 
                 represents the similarity or cost between a patch around left[x,y]  
                 and a patch shifted by disparity d in the right image. 
-  """
-  #placeholder
-  H = left_img.shape[0]
-  W = right_img.shape[1]
-  cost_volume = torch.zeros(H, W, max_disparity)
-  ############################################################################
-  # Student code begin
-  ############################################################################
+    """
+    #placeholder
+    H = left_img.shape[0]
+    W = right_img.shape[1]
+    cost_volume = torch.zeros(H, W, max_disparity)
+    ############################################################################
+    # Student code begin
+    ############################################################################
+    b_h = int(block_size//2)
+    def compare_patches(y, x, p1):
+        x_min = max(b_h, x - max_disparity+1)
+        x_max = min(W - b_h, x_min+max_disparity)
+        errors = torch.zeros(size=(max_disparity,))
+        for xi in range(x_min, x_max):
+            p2 = right_img[int(y-b_h):int(y+b_h)+1, (xi-b_h):(xi+b_h)+1, :]
 
-  raise NotImplementedError('calculate_cost_volume not implemented')
+            errors[abs(x - xi)] = sim_measure_function(p1, p2)
+                
+        return errors
+
+    min_x = b_h
+    max_x = min([W-b_h, cost_volume.shape[1]])
+
+    min_y = b_h
+    max_y = min([H-b_h, cost_volume.shape[0]])
+
+    # going over patches on left image and then calculating disparity values.
+    for yl in range(min_y, max_y):
+        for xl in range(min_x, max_x):
+            
+            p1 = left_img[int(yl-b_h):int(yl+b_h)+1, (xl-b_h):(xl+b_h)+1, :]
+
+            cost_volume[yl, xl,:] = compare_patches(yl, xl, p1)
 
   ############################################################################
   # Student code end
   ############################################################################
-  return cost_volume
+    return cost_volume
