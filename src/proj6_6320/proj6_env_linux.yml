@@ -1,4 +1,4 @@
-name: comp_vision_env
+name: proj6
 channels:
 - defaults
 - pytorch
@@ -9,14 +9,12 @@ dependencies:
 - matplotlib
 - pip
 - pytest
-- python=3.7
+- python=3.6
 - pytorch-cpu
 - torchvision-cpu=0.2
 - pyyaml
+- scikit-learn
 - scipy
 - opencv
-- ipykernel
-- pandas
-- Pillow=6.1
-- scikit-learn
 - pycm
+- pillow=6.1
