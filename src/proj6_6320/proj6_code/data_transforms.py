@@ -62,12 +62,14 @@ def get_data_augmentation_transforms(inp_size: Tuple[int, int],
   # Student code begin
   #############################################################################
 
-  # aug_transforms = transforms.Compose([
-  #   transforms.ToTensor(), 
-  #   transforms.Resize(inp_size),
-  #   transforms.ColorJitter(),
-  #   transforms.Normalize(mean=pixel_mean, std=pixel_std)
-  # ])
+  p=0.65
+  aug_transforms = transforms.Compose([
+    transforms.Resize(inp_size),
+    transforms.RandomHorizontalFlip(p=p),
+    transforms.ColorJitter(), 
+    transforms.ToTensor(), 
+    transforms.Normalize(mean=pixel_mean, std=pixel_std),
+  ])
 
   #############################################################################
   # Student code end

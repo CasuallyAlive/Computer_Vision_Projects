@@ -75,7 +75,6 @@ class Trainer():
     '''
     self.model.train()
     for epoch_idx in range(num_epochs):
-      print(enumerate(self.train_loader))
       for batch_idx, batch in enumerate(self.train_loader):
         if self.cuda:
           input_data, target_data = Variable(

@@ -4,3 +4,5 @@ required_files:
   - README.md
 optional_directories:
   - additional_data
+optional_files:
+  - README.txt

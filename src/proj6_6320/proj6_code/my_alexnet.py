@@ -26,9 +26,34 @@ class MyAlexNet(nn.Module):
     ###########################################################################
     # Student code begin
     ###########################################################################
+    alexnet_model = alexnet(pretrained=True)
+    # print(alexnet_model)
+    
+    # cnn layers frm alexnet
+    an_cnn_layers = alexnet_model.features    
+    for param in an_cnn_layers.parameters():
+      param.requires_grad = False
+    self.cnn_layers = an_cnn_layers
 
-    raise NotImplementedError('__init__ not implemented')
-
+    # avgpool layer from alexnet
+    an_avgpool_layers = alexnet_model.avgpool
+    for param in an_avgpool_layers.parameters():
+      param.requires_grad = False
+    self.avgpool = an_avgpool_layers
+        
+    # Fully connected layers from alexnet
+    an_fc_layers = alexnet_model.classifier
+    for param in an_fc_layers.parameters():
+      param.requires_grad = False
+    num_in_features = an_fc_layers[-3].out_features 
+    # print(num_in_features)
+    an_fc_layers[-1] = nn.Dropout(p=0.5)
+    an_fc_layers.add_module(name="7", 
+                module=nn.Linear(in_features=num_in_features, out_features=15))
+    
+    self.fc_layers = an_fc_layers
+    
+    self.loss_criterion = nn.CrossEntropyLoss(reduction='sum')
     ###########################################################################
     # Student code end
     ###########################################################################
@@ -49,8 +74,10 @@ class MyAlexNet(nn.Module):
     ###########################################################################
     # Student code begin
     ###########################################################################
-
-    raise NotImplementedError('forward not implemented')
+    
+    cnn_out = self.avgpool(self.cnn_layers(x))
+    cnn_out = cnn_out.view(-1, 256 * 6 * 6)
+    model_output = self.fc_layers(cnn_out)
 
     ###########################################################################
     # Student code end

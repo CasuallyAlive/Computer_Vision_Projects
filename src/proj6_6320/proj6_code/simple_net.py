@@ -19,7 +19,20 @@ class SimpleNet(nn.Module):
     ###########################################################################
     # Student code begin
     ###########################################################################
-
+    # def calc_out_shape_conv(N, Ci, Hi, Wi, Co, k, s, p=0, d=1):
+    #   Ho = ((Hi + 2*p-d*(k-1)-1)/s)+1
+    #   Wo = ((Wi + 2*p-d*(k-1)-1)/s)+1
+    #   return N, Co, Ho, Wo
+    
+    # DEF_CONV_K_SZ = 5; DEF_CONV_STRIDE = 1; DEF_FC_OUT = 120
+    
+    # experiment = [True, False, False]
+    # exp_k = 4; exp_s = 3; exp_fc = 180
+    
+    # conv_k = DEF_CONV_K_SZ if not experiment[0] else exp_k
+    # conv_s = DEF_CONV_STRIDE if not experiment[1] else exp_s
+    # fc = DEF_FC_OUT if not experiment[2] else exp_fc
+    
     self.cnn_layers = nn.Sequential(
       nn.Conv2d(in_channels=1, out_channels=10, kernel_size=5, stride=1, padding=0), # Conv: 5 x 5 kernel. 1@64x64 -> 10@60x60
       nn.MaxPool2d(kernel_size=3, stride=3), # Pool 3 x 3 kernel. 10@60x60 -> 10@20x20
@@ -30,9 +43,9 @@ class SimpleNet(nn.Module):
     )
     self.fc_layers = nn.Sequential(
       nn.Flatten(),
-      nn.Linear(in_features=500, out_features=100),
+      nn.Linear(in_features=500, out_features=120),
       nn.ReLU(),
-      nn.Linear(in_features=100, out_features=15)
+      nn.Linear(in_features=120, out_features=15)
     )
     
     self.loss_criterion = nn.CrossEntropyLoss(reduction='sum')
